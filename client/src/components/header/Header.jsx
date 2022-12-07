@@ -15,6 +15,7 @@ import { AuthContext } from "../../context/AuthContext";
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("")
   const [openDate, setOpenDate] = useState(false)
+  const [openOptions, setOpenOptions] = useState(false);
 
   const [dates, setDates] = useState([
     {
@@ -24,7 +25,7 @@ const Header = ({ type }) => {
     }
   ]);
 
-  const [openOptions, setOpenOptions] = useState(false);
+
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,

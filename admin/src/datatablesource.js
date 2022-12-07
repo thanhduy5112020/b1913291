@@ -1,5 +1,5 @@
 export const userColumns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "_id", headerName: "ID", width: 70 },
   {
     field: "user",
     headerName: "User",
@@ -19,11 +19,6 @@ export const userColumns = [
     width: 230,
   },
 
-  // {
-  //   field: "age",
-  //   headerName: "Age",
-  //   width: 100,
-  // },
 
   {
     field: "country",
@@ -42,86 +37,50 @@ export const userColumns = [
   },
 ];
 
-//temporary data
-export const userRows = [
+export const hotelColumns = [
+  { field: "_id", headerName: "ID", width: 150 },
   {
-    id: 1,
-    username: "Pikachu",
-    img: "https://i.pinimg.com/originals/dc/ab/b7/dcabb7fbb2f763d680d20a3d228cc6f9.jpg",
-    status: "active",
-    email: "Pikachu@gmail.com",
-    age: 35,
+    field: "name",
+    headerName: "Name",
+    width: 150,
   },
   {
-    id: 2,
-    username: "Chansey",
-    img: "https://img.pokemondb.net/artwork/large/chansey.jpg",
-    email: "Chansey@gmail.com",
-    status: "passive",
-    age: 42,
+    field: "type",
+    headerName: "Type",
+    width: 100,
   },
   {
-    id: 3,
-    username: "Bulbasaur",
-    img: "https://images.saymedia-content.com/.image/t_share/MTc2Mjk3OTE1NzAxMDExNjI5/pokemon-bulbasaur-nicknames.jpg",
-    email: "Bulbasaur@gmail.com",
-    status: "pending",
-    age: 45,
+    field: "title",
+    headerName: "Title",
+    width: 350,
   },
   {
-    id: 4,
-    username: "Chamander",
-    img: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/d/d4/Charmander.gif",
-    email: "Chamande@gmail.com",
-    status: "active",
-    age: 16,
+    field: "city",
+    headerName: "City",
+    width: 100,
+  },
+];
+
+export const roomColumns = [
+  { field: "_id", headerName: "ID", width: 70 },
+  {
+    field: "title",
+    headerName: "Title",
+    width: 230,
   },
   {
-    id: 5,
-    username: "Blatoise",
-    img: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/4/4a/Blastoise.gif",
-    email: "Blatoise@gmail.com",
-    status: "passive",
-    age: 22,
+    field: "desc",
+    headerName: "Description",
+    width: 200,
   },
   {
-    id: 6,
-    username: "Machamp",
-    img: "https://archives.bulbagarden.net/media/upload/thumb/d/d1/Bea_Machamp.png/250px-Bea_Machamp.png",
-    email: "6snow@gmail.com",
-    status: "active",
-    age: 15,
+    field: "price",
+    headerName: "Price",
+    width: 100,
   },
   {
-    id: 7,
-    username: "Eevee",
-    img: "https://img.pokemondb.net/artwork/large/eevee-lets-go.jpg",
-    email: "Eevee@gmail.com",
-    status: "passive",
-    age: 44,
-  },
-  {
-    id: 8,
-    username: "Moltres",
-    img: "https://archives.bulbagarden.net/media/upload/thumb/a/ab/Moltres_anime.png/250px-Moltres_anime.png",
-    email: "Moltres@gmail.com",
-    status: "active",
-    age: 36,
-  },
-  {
-    id: 9,
-    username: "Gengar",
-    img: "https://d.newsweek.com/en/full/1702169/pokemon-gengar-ash-anime.png?w=1600&h=900&q=88&f=a9f381908fc491bb811246a00e025b99",
-    email: "Gengar@gmail.com",
-    status: "pending",
-    age: 65,
-  },
-  {
-    id: 10,
-    username: "Roxie",
-    img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-    email: "snow@gmail.com",
-    status: "active",
-    age: 65,
+    field: "maxPeople",
+    headerName: "Max People",
+    width: 100,
   },
 ];

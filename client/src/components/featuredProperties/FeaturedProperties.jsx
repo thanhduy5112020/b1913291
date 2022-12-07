@@ -3,6 +3,9 @@ import "./featuredProperties.css"
 
 export const FeaturedProperties = () => {
 
+    
+    //   const { data, loading, error } = useFetch("hotels/countByCity?cities=Ha Noi,Paris,Tokyo")
+
     const { data, loading, error } = useFetch("/hotels?featured=true&limit=4")
     return (
         <div className="fp">

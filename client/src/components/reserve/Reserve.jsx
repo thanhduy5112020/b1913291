@@ -13,34 +13,6 @@ export const Reserve = ({ setOpen, hotelId }) => {
   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`)
   const { dates } = useContext(SearchContext)
 
-  // const getDatesInRange = (startDate, endDate) => {
-  //   const start = new Date(startDate)
-  //   const end = new Date(endDate)
-  //   const date = new Date(start.getTime())
-  //   const list = []
-  //   while (data <= end) {
-  //     list.push(new Date(date).getTime())
-  //     date.setDate(date.getDate() + 1)
-  //   }
-  //   return list
-  // }
-
-  // const alldates = getDatesInRange(dates[0]?.startDate, dates[0]?.endDate);
-
-  
-  // const isAvailable = (roomNumber) => {
-  //   const isFound = roomNumber.unavailableDates.some((date) =>
-  //     alldates.includes(new Date(date).getTime())
-  //   );
-
-  //   return !isFound;
-  // };
-  // const handleSelect = (e) => {
-  //   const checked = e.target.checked
-  //   const value = e.target.value
-  //   setSelectedRooms(checked ? [...selectedRooms, value] : selectedRooms.filter(item => item !== value))
-  // }
-
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);

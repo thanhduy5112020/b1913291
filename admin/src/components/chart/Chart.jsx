@@ -15,6 +15,7 @@ const data = [
   { name: "April", Total: 1600 },
   { name: "May", Total: 900 },
   { name: "June", Total: 1700 },
+  { name: "June", Total: 1700 },
 ];
 
 const Chart = ({ aspect, title }) => {
