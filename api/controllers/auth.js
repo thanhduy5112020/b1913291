@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 
 
 export const register = async (req, res, next) => {
-    console.log("Register")
+    // console.log("Register")
     try {
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)
@@ -16,7 +16,9 @@ export const register = async (req, res, next) => {
             ...req.body,
             password: hash,
         })
+        console.log(newUser.password)
         await newUser.save()
+        console.log("New Register")
         res.status(200).send(`User ${req.body.username} has been created`)
     }
     catch (err) {

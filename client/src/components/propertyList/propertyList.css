@@ -17,6 +17,7 @@
     width: 100%;
     object-fit: cover;
     height: 150px;
+    cursor: pointer;
 }
 
 .pListTitle h1{

@@ -3,8 +3,13 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
+import { useLocation } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 const Single = () => {
+  const location = useLocation()
+  const id = location.pathname.split("/")[2]
+  let { data, loading, error } = useFetch(`/users/${id}`)
   return (
     <div className="single">
       <Sidebar />
@@ -12,33 +17,32 @@ const Single = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editButton">Edit</div>
             <h1 className="title">Information</h1>
             <div className="item">
               <img
-                src="https://i.pinimg.com/originals/dc/ab/b7/dcabb7fbb2f763d680d20a3d228cc6f9.jpg"
+                src={data.img}
                 alt=""
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Pikachu</h1>
+                <h1 className="itemTitle">{data.username}</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">Pikachu@gmail.com</span>
+                  <span className="itemValue">{data.email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
-                  <span className="itemValue">+1 2345 67 89</span>
+                  <span className="itemValue">{data.phone}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Address:</span>
                   <span className="itemValue">
-                    Kanto
+                    {data.city}
                   </span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Country:</span>
-                  <span className="itemValue">Pokemon World</span>
+                  <span className="itemValue">{data.country}</span>
                 </div>
               </div>
             </div>
@@ -48,8 +52,8 @@ const Single = () => {
           </div>
         </div>
         <div className="bottom">
-        <h1 className="title">Last Transactions</h1>
-          <List/>
+          <h1 className="title">Last Transactions</h1>
+          <List />
         </div>
       </div>
     </div>

@@ -6,10 +6,11 @@
   align-items: center;
   justify-content: center;
   background-image: url("https://images.pexels.com/photos/53464/sheraton-palace-hotel-lobby-architecture-san-francisco-53464.jpeg?cs=srgb&dl=pexels-pixabay-53464.jpg&fm=jpg");
-  background-color: #0071c2;
+  background-color: #f0f2f5;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+
 }
 
 /* .lImage{

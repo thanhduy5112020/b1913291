@@ -9,7 +9,6 @@ const Featured = () => {
 
   const { data, loading, error } = useFetch("hotels/countByCity?cities=Ha Noi,Paris,Tokyo")
   const [destination, setDestination] = useState("")
-  console.log(data)
   const navigate = useNavigate();
   const { dispatch } = useContext(SearchContext)
 

@@ -92,6 +92,81 @@ export const countByType = async (req, res, next) => {
     }
 }
 
+export const sumByType = async (req, res, next) => {
+    try {
+        const hotelCount1 = await Hotel.aggregate(
+            [
+                { $match: { type: "One Star" } },
+                {
+                    $group:
+                    {
+                        _id: null,
+                        sum: { $sum: "$total" },
+                    }
+                }
+            ]
+        )
+        const hotelCount2 = await Hotel.aggregate(
+            [
+                { $match: { type: "Two Star" } },
+                {
+                    $group:
+                    {
+                        _id: null,
+                        sum: { $sum: "$total" },
+                    }
+                }
+            ]
+        )
+        const hotelCount3 = await Hotel.aggregate(
+            [
+                { $match: { type: "Three Star" } },
+                {
+                    $group:
+                    {
+                        _id: null,
+                        sum: { $sum: "$total" },
+                    }
+                }
+            ]
+        )
+        const hotelCount4 = await Hotel.aggregate(
+            [
+                { $match: { type: "Four Star" } },
+                {
+                    $group:
+                    {
+                        _id: null,
+                        sum: { $sum: "$total" },
+                    }
+                }
+            ]
+        )
+        const hotelCount5 = await Hotel.aggregate(
+            [
+                { $match: { type: "Five Star" } },
+                {
+                    $group:
+                    {
+                        _id: null,
+                        sum: { $sum: "$total" },
+                    }
+                }
+            ]
+        )
+        res.status(200).json([
+            { revenue1: hotelCount1 },
+            { revenue2: hotelCount2 },
+            { revenue3: hotelCount3 },
+            { revenue4: hotelCount4 },
+            { revenue5: hotelCount5 },
+        ])
+
+    } catch (err) {
+        next(err);
+    }
+}
+
 export const getHotelRooms = async (req, res, next) => {
     try {
         const hotel = await Hotel.findById(req.params.id)
@@ -102,6 +177,38 @@ export const getHotelRooms = async (req, res, next) => {
         }))
         console.log(list)
         res.status(200).json(list)
+    } catch (err) {
+        next(err);
+    }
+}
+
+export const countByHotel = async (req, res, next) => {
+    try {
+        const hotel = await Hotel.countDocuments()
+        res.status(200).json([
+            { count: hotel }
+        ])
+    } catch (err) {
+        next(err);
+    }
+}
+
+export const sumRevenueByHotel = async (req, res, next) => {
+    try {
+        const hotel = await Hotel.aggregate(
+            [
+                {
+                    $group:
+                    {
+                        _id: null,
+                        sum: { $sum: "$total" },
+                    }
+                }
+            ]
+        )
+        res.status(200).json([
+            { revenueAll: hotel }
+        ])
     } catch (err) {
         next(err);
     }

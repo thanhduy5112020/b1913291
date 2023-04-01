@@ -16,30 +16,35 @@ import { Reserve } from "../../components/reserve/Reserve"
 const Hotel = () => {
     const location = useLocation()
     const id = location.pathname.split("/")[2]
-    console.log(id)
 
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false)
 
-   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+    const { data, loading, error } = useFetch(`/hotels/find/${id}`);
 
-   const {user} = useContext(AuthContext)
-   const navigate = useNavigate()
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
 
-   const {dates, options} = useContext(SearchContext)
+    const { dates, options } = useContext(SearchContext)
 
-//    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-   function dayDifference(date1, date2) {
-    if(date1==null) return 0;
-     const timeDiff = Math.abs(date2?.getDate() - date1?.getDate());
-     console.log(date2?.getDate()  + " " + date1?.getDate())
-    //  const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-     return timeDiff;
-   }
- 
-   const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate) + 1;
-   console.log(days)
+    //    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    function dayDifference(date1, date2) {
+        if (date2 == null) return 0;
+        const timeDiff = Math.abs(date2?.getDate() - date1?.getDate());
+        console.log(date2?.getDate() + " " + date1?.getDate())
+        //  const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+        return timeDiff;
+    }
+
+    function standardOption(options){
+        if(options == null) return 1;
+        return options;
+    }
+    const newOptions = standardOption(options.room);
+
+    const days = dayDifference(dates[0]?.endDate, dates[0]?.startDate) + 1;
+    console.log("days" + days)
 
 
     const handleOpen = (i) => {
@@ -58,12 +63,17 @@ const Hotel = () => {
     }
 
     const handleClick = () => {
-        if(user){
+        if (user) {
             setOpenModal(true)
-        }else{
+        } else {
             navigate("/login");
         }
     }
+
+    const total = data.total + days * data?.cheapestPrice * newOptions;
+    const updateTotal = {...data, total: total}
+    const hotelData = data
+    console.log(updateTotal);
 
     return (
         <div>
@@ -80,11 +90,11 @@ const Hotel = () => {
                         <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" />
                     </div>}
                     <div className="hotelWrapper">
-                        <button className="bookNow" style={{color: "red", backgroundColor: "yellow"}}>Reserve or Book Now!</button>
+                        <button className="bookNow" style={{ color: "red", backgroundColor: "yellow" }}>View!</button>
                         <h1 className="hotelTitle">{data.name}</h1>
                         <div className="hotelAddress">
                             <FontAwesomeIcon icon={faLocationDot} />
-                            <span>Elton St 125 New york</span>
+                            <span>{data.city}</span>
                         </div>
                         <span className="hotelDistance">
                             Excellent location - {data.distance}m from center
@@ -112,7 +122,7 @@ const Hotel = () => {
                                 <h1>Perfect for a 9-night stay!</h1>
                                 <span>Couples particularly like the location — they rated it 8.4 for a two-person trip.</span>
                                 <h2>
-                                    <b>${days * data?.cheapestPrice * options?.room}</b> ({days} nights)
+                                    <b>${total}</b> ({days} nights)
                                 </h2>
                                 <button onClick={handleClick}>Reserve or Book Now</button>
                             </div>
@@ -121,7 +131,7 @@ const Hotel = () => {
                     <MailList />
                     <Footer />
                 </div>)}
-                {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+            {openModal && <Reserve setOpen={setOpenModal} hotelId={id} total={total} hotelData={hotelData} updateTotal={updateTotal}/>}
         </div>
     )
 }

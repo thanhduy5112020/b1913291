@@ -7,18 +7,24 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import useFetch from "../../hooks/useFetch";
 
-const data = [
-  { name: "January", Total: 1200 },
-  { name: "February", Total: 2100 },
-  { name: "March", Total: 800 },
-  { name: "April", Total: 1600 },
-  { name: "May", Total: 900 },
-  { name: "June", Total: 1700 },
-  { name: "June", Total: 1700 },
-];
+
 
 const Chart = ({ aspect, title }) => {
+  const { data, loading, error } = useFetch(`/hotels/sumByType`);
+  // console.log(data[3]?.revenue2[0]?.sum )
+  const data1 = [
+    { name: "June", Total: 0},
+    { name: "1 Star", Total: data[0]?.revenue1[0]?.sum},
+    { name: "2 Star", Total: data[1]?.revenue2[0]?.sum },
+    { name: "3 Star", Total: data[2]?.revenue3[0]?.sum },
+    { name: "4 Star", Total: data[3]?.revenue4[0]?.sum },
+    { name: "5 Star", Total: data[4]?.revenue5[0]?.sum},
+  
+    { name: "", Total: 0 },
+  ];
+
   return (
     <div className="chart">
       <div className="title">{title}</div>
@@ -26,7 +32,7 @@ const Chart = ({ aspect, title }) => {
         <AreaChart
           width={730}
           height={250}
-          data={data}
+          data={data1}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>

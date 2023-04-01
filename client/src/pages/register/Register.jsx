@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useRef } from "react";
 import "./register.css";
-import { useHistory } from "react-router";
+import "../login/login.css";
+import { useHistory, useNavigate } from "react-router";
 
 export const Register = () => {
   const username = useRef();
   const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
-//   const history = useHistory();
+  const city = useRef();
+  const country = useRef();
+  const phone = useRef();
+  const navigate = useNavigate()
+  //   const history = useHistory();
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -19,9 +24,13 @@ export const Register = () => {
         username: username.current.value,
         email: email.current.value,
         password: password.current.value,
+        city: city.current.value,
+        country: country.current.value,
+        phone: phone.current.value,
       };
       try {
         await axios.post("/auth/register", user);
+        navigate("/")
         // history.push("/login");
       } catch (err) {
         console.log(err);
@@ -31,8 +40,8 @@ export const Register = () => {
 
   return (
     <div className="login">
-      <div className="loginWrapper">
-        
+      <div className="llContainer">
+
         <div className="loginRight">
           <form className="loginBox" onSubmit={handleClick}>
             <input
@@ -54,7 +63,7 @@ export const Register = () => {
               ref={password}
               className="loginInput"
               type="password"
-              minLength="6"
+              // minLength="6"
             />
             <input
               placeholder="Password Again"
@@ -63,7 +72,25 @@ export const Register = () => {
               className="loginInput"
               type="password"
             />
-            <button className="loginButton" type="submit">
+            <input
+              placeholder="City"
+              required
+              ref={city}
+              className="loginInput"
+            />
+            <input
+              placeholder="Country"
+              required
+              ref={country}
+              className="loginInput"
+            />
+            <input
+              placeholder="Phone"
+              required
+              ref={phone}
+              className="loginInput"
+            />
+            <button className="loginButton" type="submit" onClick={handleClick}>
               Sign Up
             </button>
 

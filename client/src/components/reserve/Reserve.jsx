@@ -7,11 +7,13 @@ import { SearchContext } from "../../context/SearchContext"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-export const Reserve = ({ setOpen, hotelId }) => {
+export const Reserve = ({ setOpen, hotelId, total, hotelData, updateTotal }) => {
 
   const [selectedRooms, setSelectedRooms] = useState([])
   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`)
   const { dates } = useContext(SearchContext)
+
+  console.log(total)
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -59,6 +61,9 @@ export const Reserve = ({ setOpen, hotelId }) => {
           return res.data;
         })
       );
+
+      await axios.put(`/hotels/${hotelId}`, updateTotal);
+
       setOpen(false);
       navigate("/")
     } catch (err) {}
@@ -67,14 +72,14 @@ export const Reserve = ({ setOpen, hotelId }) => {
     <div className="reserve">
       <div className="rContainer">
         <FontAwesomeIcon icon={faCircleXmark} className="rClose" onClick={() => setOpen(false)} />
-        <span>Select your rooms: </span>
+        <span style={{color: "green"}} >Select your rooms: </span>
         {data.map(item => (
           <div className="rItem" key={item._id}>
             <div className="rItemInfo">
               <div className="rTitle">{item.title}</div>
               <div className="rDesc">{item.desc}</div>
               <div className="rMax">Max people: {item.maxPeople}</div>
-              <div className="rPrice">{item.price}</div>
+              {/* <div className="rPrice">Price: {item.price}</div> */}
             </div>
             <div className="rSelectRooms">
               {item.roomNumbers.map(roomNumber => (

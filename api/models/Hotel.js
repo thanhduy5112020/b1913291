@@ -23,7 +23,7 @@ const HotelSchema = new mongoose.Schema({
         required: true
     },
     title: {
-
+        type: String,
     },
     photos: {
         type: [String],
@@ -47,6 +47,10 @@ const HotelSchema = new mongoose.Schema({
     featured: {
         type: Boolean,
         default: false
+    },
+    total:{
+        type:Number,
+        default: 0
     }
 })
 

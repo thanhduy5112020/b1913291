@@ -12,6 +12,8 @@ import { AuthContext } from "./context/AuthContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import EditUser from "./pages/editUser/EditUser";
+import EditHotel from "./pages/editHotel/EditHotel";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -40,6 +42,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
             <Route path="users">
               <Route
                 index
@@ -65,7 +68,17 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+               <Route
+                path="update/:userId"
+                element={
+                  <ProtectedRoute>
+                    <EditUser />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
+
+
             <Route path="hotels">
               <Route
                 index
@@ -76,10 +89,10 @@ function App() {
                 }
               />
               <Route
-                path=":productId"
+                path="update/:hotelId"
                 element={
                   <ProtectedRoute>
-                    <Single />
+                     <NewHotel />
                   </ProtectedRoute>
                 }
               />
@@ -87,11 +100,14 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewHotel  />
+                    <NewHotel />
                   </ProtectedRoute>
                 }
               />
+             
             </Route>
+
+
             <Route path="rooms">
               <Route
                 index
@@ -113,12 +129,13 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>
-                    <NewRoom  />
+                    <NewRoom />
                   </ProtectedRoute>
                 }
               />
             </Route>
           </Route>
+
         </Routes>
       </BrowserRouter>
     </div>

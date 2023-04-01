@@ -4,17 +4,28 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import useFetch from "../../hooks/useFetch";
+
 
 const Widget = ({ type }) => {
-  let data;
+
+  function standardLink(type){
+    if(type=="user") return "/users/countByUser"
+    if(type=="earning") return "/hotels/sumRevenueByHotel"
+    return "/hotels/countByHotel"
+  }
+  const link = standardLink(type)
+  const { data, loading, error } = useFetch(`${link}`)
+  
+  let data1;
 
   //temporary
-  const amount = 100;
+  let amount = 9.8;
   const diff = 20;
 
   switch (type) {
     case "user":
-      data = {
+      data1 = {
         title: "USERS",
         isMoney: false,
         link: "See all users",
@@ -28,10 +39,11 @@ const Widget = ({ type }) => {
           />
         ),
       };
+      amount = data[0]?.count
       break;
     case "order":
-      data = {
-        title: "BOOKINGS",
+      data1 = {
+        title: "HOTELS",
         isMoney: false,
         link: "View all bookings",
         icon: (
@@ -44,10 +56,11 @@ const Widget = ({ type }) => {
           />
         ),
       };
+      amount = data[0]?.count
       break;
     case "earning":
-      data = {
-        title: "EARNINGS",
+      data1 = {
+        title: "Revenue",
         isMoney: true,
         link: "View net earnings",
         icon: (
@@ -57,11 +70,12 @@ const Widget = ({ type }) => {
           />
         ),
       };
+      amount = data[0]?.revenueAll[0]?.sum
       break;
     case "balance":
-      data = {
-        title: "BALANCE",
-        isMoney: true,
+      data1 = {
+        title: "Rating",
+        isMoney: false,
         link: "See details",
         icon: (
           <AccountBalanceWalletOutlinedIcon
@@ -81,18 +95,18 @@ const Widget = ({ type }) => {
   return (
     <div className="widget">
       <div className="left">
-        <span className="title">{data.title}</span>
+        <span className="title">{data1.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data1.isMoney && "$"} {amount}
         </span>
-        <span className="link">{data.link}</span>
+        <span className="link">{data1.link}</span>
       </div>
       <div className="right">
         <div className="percentage positive">
           <KeyboardArrowUpIcon />
           {diff} %
         </div>
-        {data.icon}
+        {data1.icon}
       </div>
     </div>
   );
